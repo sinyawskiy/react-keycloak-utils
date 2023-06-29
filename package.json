@@ -1,0 +1,29 @@
+{
+  "name": "react-keycloak-utils",
+  "version": "0.0.2",
+  "description": "Keycloak utils",
+  "author": "Alexey Sinyawskiy",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "source": "src/index.js",
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/sinyawskiy/react-keycloak-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:sinyawskiy/react-keycloak-utils.git"
+  },
+  "keywords": [
+    "react",
+    "keycloak",
+    "utils"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {},
+  "dependencies": {
+    "base64-js": "^1.5.1",
+    "js-cookie": "^3.0.1",
+    "js-sha256": "^0.9.0"
+  }
+}
