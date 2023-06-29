@@ -1,5 +1,4 @@
 import SimpleKeycloak from './simpleKeycloak';
 import {decodeToken, isTokenExpired} from './keycloakUtils';
 
-export { decodeToken, isTokenExpired };
-export default SimpleKeycloak;
+export { decodeToken, isTokenExpired, SimpleKeycloak };
