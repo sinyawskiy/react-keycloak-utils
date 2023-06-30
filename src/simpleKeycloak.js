@@ -28,12 +28,15 @@ class SimpleKeycloak{
   verifyToken = () => {}
   exchangeCode = () => {}
   setInitialized = () => {}
+  setError = () => {}
 
   constructor(config){
     this.url = config.url;
     this.realm = config.realm;
     this.clientId = config.clientId;
-    this.scope = config.scope;
+    if(config.scope) {
+      this.scope = config.scope;
+    }
     this.keycloakCallbackPrefix = config.keycloakCallbackPrefix;
     this.tokenStorageName = config.tokenStorageName || `kc-${config.realm}-${config.clientId}`;
     return this;
@@ -43,7 +46,7 @@ class SimpleKeycloak{
     return `${this.url}${this.url.charAt(this.url.length - 1) === '/'?'':'/'}realms/${encodeURIComponent(this.realm)}`;
   }
 
-  init = (exchangeCode, verifyToken, setInitialized) => {
+  init = (exchangeCode, verifyToken, setInitialized, setError) => {
     const realmUrl = this.getRealmUrl();
     this.authorization_endpoint = `${realmUrl}/protocol/openid-connect/auth`;
     this.end_session_endpoint = `${realmUrl}/protocol/openid-connect/logout`;
@@ -52,6 +55,7 @@ class SimpleKeycloak{
     this.exchangeCode = exchangeCode;
     this.verifyToken = verifyToken;
     this.setInitialized = setInitialized;
+    this.setError = setError;
     const self = this;
     self.processInit();
   }
@@ -148,13 +152,9 @@ class SimpleKeycloak{
     const {code, error, storedNonce} = oauth;
     const timeLocal = new Date().getTime();
     if (error) {
-      //   const errorData = { error: error, error_description: oauth.error_description };
-      //   this.onAuthError && this.onAuthError(errorData);
-      //   promise && promise.setError(errorData);
-      // } else {
-      //   promise && promise.setSuccess();
-      // }
-      return;
+       const errorData = { error: error, error_description: oauth.error_description };
+       this.setError(errorData);
+       return;
     }
     if (code) {
       // выходим из класса и обмениваем билет на токен через бекенд
