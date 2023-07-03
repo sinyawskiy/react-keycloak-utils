@@ -1,6 +1,6 @@
 {
   "name": "react-keycloak-utils",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Keycloak utils",
   "author": "Alexey Sinyawskiy",
   "license": "ISC",
